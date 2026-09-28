@@ -39,7 +39,7 @@
         .login-card {
             background-color: var(--white);
             width: 100%;
-            max-width: 420px;
+            max-width: 520px;
             padding: 40px 30px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
@@ -152,11 +152,52 @@
         .portal-link { display:block; text-decoration:none; margin:12px 0; }
         .logout-btn { margin-top:16px; background:none; border:0; text-decoration:underline; cursor:pointer; padding:12px; }
         @media(max-width:480px) { .login-card { padding:28px 18px; } .type-btn { font-size:12px; padding:12px 6px; } .input-group input { font-size:16px; } }
+    @media(max-width:380px){.login-type-toggle{flex-direction:column;}.type-btn{width:100%;}}
+    
+        /* Cores e transições por perfil */
+        .login-card {
+            --profile-bg: #000000;
+            --profile-text: #FFD100;
+            --profile-hover: #222222;
+            --profile-ring: rgba(255,209,0,.3);
+        }
+        .login-card[data-profile="loja"] {
+            --profile-bg: #FFD100;
+            --profile-text: #171717;
+            --profile-hover: #E8BE00;
+            --profile-ring: rgba(255,209,0,.3);
+        }
+        .login-card[data-profile="franqueado"] {
+            --profile-bg: #262626;
+            --profile-text: #FFFFFF;
+            --profile-hover: #000000;
+            --profile-ring: rgba(0,0,0,.2);
+        }
+        .btn-submit, .type-btn {
+            transition: background-color .35s ease, color .35s ease, box-shadow .35s ease;
+        }
+        .btn-submit, .type-btn.active {
+            background-color: var(--profile-bg);
+            color: var(--profile-text);
+        }
+        .btn-submit:hover { background-color: var(--profile-hover); }
+        .input-group input:focus {
+            border-color: var(--profile-bg);
+            box-shadow: 0 0 0 3px var(--profile-ring);
+        }
+        .type-btn:focus-visible, .btn-submit:focus-visible {
+            outline: 3px solid #737373;
+            outline-offset: 3px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-submit, .type-btn, .input-group input { transition: none; }
+        }
+
     </style>
 </head>
 <body>
 
-    <main class="login-card">
+    <main class="login-card" data-profile="adm">
         <!-- Logo referenciando o novo nome do arquivo em anexo -->
         <img class="login-logo" src="data:image/png;base64,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" alt="Tennis Place">
 
@@ -167,6 +208,7 @@
         <div class="login-type-toggle" id="profile-toggle">
             <button type="button" class="type-btn active" id="btn-adm" onclick="setLoginType('adm')">Administrativo</button>
             <button type="button" class="type-btn" id="btn-loja" onclick="setLoginType('loja')">Lojas</button>
+            <button type="button" class="type-btn" id="btn-franqueado" onclick="setLoginType('franqueado')">Franqueado</button>
         </div>
 
         <form id="login-form">
@@ -186,6 +228,7 @@
         <section id="portal-selection" hidden aria-label="Portais disponíveis">
             <a class="btn-submit portal-link" id="link-loja" href="Portal_de_Manuais_da_Loja.html">Portal de Manuais da Loja</a>
             <a class="btn-submit portal-link" id="link-adm" href="Portal_de_Manuais_do_Administrativo.html" hidden>Portal de Manuais do Administrativo</a>
+            <a class="btn-submit portal-link" id="link-franqueado" href="Portal_de_Manuais_do_Franqueado.html" hidden>Portal de Manuais do Franqueado</a>
             <button type="button" class="logout-btn" id="logout">Sair</button>
         </section>
     </main>
@@ -201,29 +244,35 @@
             ARAS:'50354235000150', GVAL:'61529650000113', CVAL:'61601205000206',
             JUIZ:'34756204000179', ITAU:'29398691000105'
         });
+        const franchiseStores = Object.freeze(['APAR','CRDO','PSUL','ITAU','JUIZ','GVAL','CVAL','IPAT','ARAS']);
         const sessionKey = 'tp-manuais-session-v1';
         let currentLoginType = 'adm';
         const el = id => document.getElementById(id);
         function setLoginType(type) {
             currentLoginType = type;
-            ['adm','loja'].forEach(profile => {
+            document.querySelector('.login-card').setAttribute('data-profile', type);
+            ['adm','loja','franqueado'].forEach(profile => {
                 el('btn-'+profile).classList.toggle('active', profile === type);
                 el('btn-'+profile).setAttribute('aria-pressed', String(profile === type));
             });
             el('login-form').reset();
             el('login-error').textContent = '';
-            if (type === 'loja') el('user-password').setAttribute('maxlength','14');
+            if (type === 'loja' || type === 'franqueado') el('user-password').setAttribute('maxlength','14');
             else el('user-password').removeAttribute('maxlength');
         }
         function validSession(session) {
             return session && ((session.role === 'adm' && session.login === 'ADM') ||
-                (session.role === 'loja' && Object.prototype.hasOwnProperty.call(stores, session.login)));
+                (session.role === 'loja' && Object.prototype.hasOwnProperty.call(stores, session.login)) ||
+                (session.role === 'franqueado' && franchiseStores.includes(session.login)));
         }
         function showPortals(session) {
+            document.querySelector('.login-card').setAttribute('data-profile', session.role);
             el('login-form').hidden = true;
             el('profile-toggle').hidden = true;
             el('portal-selection').hidden = false;
             el('link-adm').hidden = session.role !== 'adm';
+            el('link-loja').hidden = session.role === 'franqueado';
+            el('link-franqueado').hidden = session.role !== 'franqueado' && session.role !== 'adm';
             document.querySelector('.login-subtitle').textContent = 'Selecione o portal que deseja acessar';
             el('user-password').value = '';
         }
@@ -233,7 +282,8 @@
             const password = el('user-password').value;
             const accepted = currentLoginType === 'adm'
                 ? login === 'ADM' && password === 'Tennis@TP'
-                : Object.prototype.hasOwnProperty.call(stores, login) && stores[login] === password;
+                : (currentLoginType === 'loja' || (currentLoginType === 'franqueado' && franchiseStores.includes(login)))
+                    && Object.prototype.hasOwnProperty.call(stores, login) && stores[login] === password;
             if (!accepted) {
                 el('login-error').textContent = 'Login ou senha inválidos.';
                 return;
@@ -241,12 +291,13 @@
             const session = { role: currentLoginType, login };
             try { sessionStorage.setItem(sessionKey, JSON.stringify(session)); } catch (_) {}
             showPortals(session);
-            el('link-loja').focus();
+            el(session.role === 'franqueado' ? 'link-franqueado' : 'link-loja').focus();
         });
         el('logout').addEventListener('click', function() {
             try { sessionStorage.removeItem(sessionKey); } catch (_) {}
             el('portal-selection').hidden = true;
             el('link-adm').hidden = true;
+            el('link-franqueado').hidden = true;
             el('login-form').hidden = false;
             el('profile-toggle').hidden = false;
             document.querySelector('.login-subtitle').textContent = 'Selecione seu perfil para acessar o conteúdo';
