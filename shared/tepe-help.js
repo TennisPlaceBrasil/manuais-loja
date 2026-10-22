@@ -60,7 +60,7 @@ function infer(){
  if(path.includes('precificador')){send(visible('#loginPassword')?'pricing-login':'pricing');return;}
  if(path.includes('analise')){send(visible('#password')?'analysis-login':visible('#detail')?'analysis-detail':'analysis');return;}
  if(path.includes('estoquevendas')){const key=location.hash.replace('#modulo-','');send(key==='validacao'?'dashboard-validacao':/^[1-7]$/.test(key)?'dashboard-'+key:'inventory');return;}
- if(path.includes('manual')||path.includes('portal')||path.includes('acesso'))send(visible('#user-password')?'login':visible('#secure-frame')?'manual-step':'manuals');
+ if(path.includes('manual')||path.includes('manuais')||path.includes('portal')||path.includes('acesso'))send(visible('#user-password')?'login':visible('#secure-frame')?'manual-step':'manuals');
 }
 window.TPHelp={setContext:send};
 window.addEventListener('tp-help',e=>send(e.detail));
